@@ -14,16 +14,36 @@ void UserBalance()
 
 void UserWithdrawal()
 {
-    balance -= withdrawal;
-    Console.WriteLine("Please collect your cash");
-    UserBalance();
+    double withdrawal = 0.0;
+    Console.Write("Enter the amount to withdraw : ");
+    withdrawal = Convert.ToDouble(Console.ReadLine());
+    if (withdrawal > balance)
+    {
+        Console.WriteLine("The withdrawal amount exceeded the balance amount ");
+    }
+    else
+    {
+        balance -= withdrawal;
+        Console.WriteLine("Please collect your cash");
+        UserBalance();
+    }
 }
 
 void UserDeposit()
 {
-    balance += deposit;
-    Console.WriteLine("Your balance is updated");
-    UserBalance();
+    Console.Write("Enter the amount to deposit: ");
+    deposit = Convert.ToDouble(Console.ReadLine());
+    if (deposit == 0)
+    {
+        UserBalance();
+    }
+    else
+    {
+        balance += deposit;
+        Console.WriteLine("Your balance is updated");
+        UserBalance();
+    }
+    
 }
 
 void UserMenu()
@@ -35,6 +55,11 @@ void UserMenu()
     Console.WriteLine("Enter 4 to quit the program");
     Console.Write("Enter your choice: ");
     choice = Convert.ToInt32(Console.ReadLine());
+}
+
+void UserThankyou()
+{
+    Console.WriteLine("Thankyou for using ATM ");
 }
 
 try
@@ -54,31 +79,13 @@ try
                     UserBalance();
                     break;
                 case 2:
-                    Console.Write("Enter the amount to withdraw : ");
-                    withdrawal = Convert.ToDouble(Console.ReadLine());
-                    if (withdrawal > balance)
-                    {
-                        Console.WriteLine("The withdrawal amount exceeded the balance amount ");
-                    }
-                    else
-                    {
-                        UserWithdrawal();
-                    }
+                    UserWithdrawal();
                     break;
                 case 3:
-                    Console.Write("Enter the amount to deposit: ");
-                    deposit = Convert.ToDouble(Console.ReadLine());
-                    if (deposit == 0)
-                    {
-                        UserBalance();
-                    }
-                    else
-                    {
-                        UserDeposit();
-                    }
+                    UserDeposit();
                     break;
                 case 4:
-                    Console.WriteLine("Thankyou for using ATM ");
+                    UserThankyou();
                     break;
             }
         }   
